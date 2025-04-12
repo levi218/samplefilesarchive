@@ -2,7 +2,6 @@
 /* eslint-disable promise/always-return */
 /* eslint-disable promise/catch-or-return */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect, useMemo } from 'react';
 import './App.css';
 import './fileicon.css';
