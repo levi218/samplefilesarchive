@@ -26,6 +26,11 @@
   border-style: solid;
   border-color: #fff #fff rgba(255,255,255,.35) rgba(255,255,255,.35);
 }
+
+.dark .file-icon::before {
+  border-color: #000 #000 rgba(255,255,255,.35) rgba(255,255,255,.35);
+}
+
 .file-icon::after {
   display: block;
   content: attr(data-type);

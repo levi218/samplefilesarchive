@@ -29,6 +29,7 @@ import { resolveHtmlPath } from './util';
 import store from './store';
 import { getAllFiles, getFile, getFileInfo } from './providers/repo';
 import { FileDef } from './providers/base';
+import iconBase64 from './app-icon';
 
 class AppUpdater {
   constructor() {
@@ -131,9 +132,10 @@ if (!store.get('tempFileLocation')) {
 
 ipcMain.on('ondragstart', async (event, file: FileDef) => {
   try {
-    const icon = nativeImage.createFromDataURL(
-      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABg2lDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TRZEWBzsUccjQOtlFRRxrFYpQIdQKrTqYXPoFTRqSFBdHwbXg4Mdi1cHFWVcHV0EQ/ABxF5wUXaTE/yWFFjEeHPfj3b3H3TtAaNWYZvUlAU23zWw6JeYLq+LAK4KIIowQ4jKzjDlJysB3fN0jwNe7BM/yP/fnCKtFiwEBkTjJDNMm3iCe2bQNzvvEEVaRVeJz4gmTLkj8yHXF4zfOZZcFnhkxc9l54gixWO5hpYdZxdSIp4ljqqZTvpD3WOW8xVmrNVjnnvyFoaK+ssx1mmNIYxFLkCBCQQNV1GAjQatOioUs7ad8/KOuXyKXQq4qGDkWUIcG2fWD/8Hvbq3S1KSXFEoB/S+O8xEHBnaBdtNxvo8dp30CBJ+BK73rr7eA2U/Sm10tdgQMbwMX111N2QMud4DokyGbsisFaQqlEvB+Rt9UAEZugaE1r7fOPk4fgBx1lbkBDg6B8TJlr/u8e7C3t3/PdPr7AX6bcqtVsvBCAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH6QMYDRQnrO4UJwAAAoJJREFUOMttk0tIlFEUx3/nmzszjmaKbRplyqTASsWRWhRFBdnGjGpTEOSiVbuIdkFE0E7CRRAtIiJoVQS9NhZkQWlFj52L8tVrelD0MPX75p7TYnTmCzrLw73/8//d/z1y8/7j/SIyKiIIBiIIgpkhQYAImBqGAZTOAGYA0urMbLR364aXzNfAhSuZsfG33elUqn56evrL16/ffiSTCb9p44YXhw/uDYnV7aERnCDlxqn+czUfP3we3tm9pS2VdCUnKBcvX2Vk5Mng6YEL+44fOfS9ImEEccU3Y1O9u3q2t61b10V7Rzud+Q7y+TwtzTn6DuztHh55dvdk//naynUILOYgjMLFLkgARtHrAi09PTt4PfaO9V3tXWPjU7vLAmY4M18WUDMMZWJikqmpdyCCSzgwJd/ZRmfHas6cvZhZOC8ILo5gIF4N7z3eK4igPgQRikWPmUdVYwMVZ1ZBCEQC7z1Ll+VobGpibmaGolcW1S7CqzE5MY6W8itH6SzuwFRVParGx0KBn7+nqU4n+VD4REtLM5HXku+YZWdakQgSiaDolch7Jt++xxdDZmdmqa2rI7c8V8KKTxQILNYRRGfn5giLEdmmLIpQXd9AfcMSwjAkjCIymXS6bEAVR4xpTdvaV0MPhsnU1JJ0jmw2i1fFJRMUCp8ZevCIFStXjcZTcxpDWNa8/GkhU/P82o3Brijy819FEIEgEZDL5Z40NS69908KPhbLwd5t/tL1wc0N9Yu3mgRVURjOmZmkq1K/MFJJl3jYt2uLryCAs39eBfr2dP8B7gAcO9nfokEgZ04cfcN/Ss2QK7fu7QcZFQGR0mqIBEipMT/JQAzBMDOw8nK3/gX75TQw1o4KfAAAAABJRU5ErkJggg==',
-    );
+    const icon = nativeImage.createFromDataURL(iconBase64).resize({
+      width: 48,
+      height: 48,
+    });
     let userDataPath = store.get('tempFileLocation') as string;
     if (!userDataPath) {
       userDataPath = app.getPath('userData');
@@ -248,9 +250,10 @@ app.disableHardwareAcceleration();
 app
   .whenReady()
   .then(() => {
-    const icon = nativeImage.createFromDataURL(
-      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABg2lDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TRZEWBzsUccjQOtlFRRxrFYpQIdQKrTqYXPoFTRqSFBdHwbXg4Mdi1cHFWVcHV0EQ/ABxF5wUXaTE/yWFFjEeHPfj3b3H3TtAaNWYZvUlAU23zWw6JeYLq+LAK4KIIowQ4jKzjDlJysB3fN0jwNe7BM/yP/fnCKtFiwEBkTjJDNMm3iCe2bQNzvvEEVaRVeJz4gmTLkj8yHXF4zfOZZcFnhkxc9l54gixWO5hpYdZxdSIp4ljqqZTvpD3WOW8xVmrNVjnnvyFoaK+ssx1mmNIYxFLkCBCQQNV1GAjQatOioUs7ad8/KOuXyKXQq4qGDkWUIcG2fWD/8Hvbq3S1KSXFEoB/S+O8xEHBnaBdtNxvo8dp30CBJ+BK73rr7eA2U/Sm10tdgQMbwMX111N2QMud4DokyGbsisFaQqlEvB+Rt9UAEZugaE1r7fOPk4fgBx1lbkBDg6B8TJlr/u8e7C3t3/PdPr7AX6bcqtVsvBCAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH6QMYDRQnrO4UJwAAAoJJREFUOMttk0tIlFEUx3/nmzszjmaKbRplyqTASsWRWhRFBdnGjGpTEOSiVbuIdkFE0E7CRRAtIiJoVQS9NhZkQWlFj52L8tVrelD0MPX75p7TYnTmCzrLw73/8//d/z1y8/7j/SIyKiIIBiIIgpkhQYAImBqGAZTOAGYA0urMbLR364aXzNfAhSuZsfG33elUqn56evrL16/ffiSTCb9p44YXhw/uDYnV7aERnCDlxqn+czUfP3we3tm9pS2VdCUnKBcvX2Vk5Mng6YEL+44fOfS9ImEEccU3Y1O9u3q2t61b10V7Rzud+Q7y+TwtzTn6DuztHh55dvdk//naynUILOYgjMLFLkgARtHrAi09PTt4PfaO9V3tXWPjU7vLAmY4M18WUDMMZWJikqmpdyCCSzgwJd/ZRmfHas6cvZhZOC8ILo5gIF4N7z3eK4igPgQRikWPmUdVYwMVZ1ZBCEQC7z1Ll+VobGpibmaGolcW1S7CqzE5MY6W8itH6SzuwFRVParGx0KBn7+nqU4n+VD4REtLM5HXku+YZWdakQgSiaDolch7Jt++xxdDZmdmqa2rI7c8V8KKTxQILNYRRGfn5giLEdmmLIpQXd9AfcMSwjAkjCIymXS6bEAVR4xpTdvaV0MPhsnU1JJ0jmw2i1fFJRMUCp8ZevCIFStXjcZTcxpDWNa8/GkhU/P82o3Brijy819FEIEgEZDL5Z40NS69908KPhbLwd5t/tL1wc0N9Yu3mgRVURjOmZmkq1K/MFJJl3jYt2uLryCAs39eBfr2dP8B7gAcO9nfokEgZ04cfcN/Ss2QK7fu7QcZFQGR0mqIBEipMT/JQAzBMDOw8nK3/gX75TQw1o4KfAAAAABJRU5ErkJggg==',
-    );
+    const icon = nativeImage.createFromDataURL(iconBase64).resize({
+      width: 16,
+      height: 16,
+    });
     const tray = new Tray(icon);
     const contextMenu = Menu.buildFromTemplate([
       { label: 'Show App', click: () => createWindow() },

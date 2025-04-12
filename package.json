@@ -1,6 +1,6 @@
 {
-  "name": "electron-react-boilerplate",
-  "description": "A foundation for scalable desktop apps",
+  "name": "samplefilesarchive",
+  "description": "Utility application designed to manage and retrieve sample files from configured repositories",
   "keywords": [
     "electron",
     "boilerplate",
@@ -12,6 +12,7 @@
     "hot",
     "reload"
   ],
+  "icon": "assets/icon.png",
   "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
   "bugs": {
     "url": "https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues"
@@ -22,17 +23,9 @@
   },
   "license": "MIT",
   "author": {
-    "name": "Electron React Boilerplate Maintainers",
-    "email": "electronreactboilerplate@gmail.com",
-    "url": "https://electron-react-boilerplate.js.org"
+    "name": "Nguyen Quang Huy",
+    "email": "nguyenquanghuy1997@gmail.com"
   },
-  "contributors": [
-    {
-      "name": "Amila Welihinda",
-      "email": "amilajack@gmail.com",
-      "url": "https://github.com/amilajack"
-    }
-  ],
   "main": "./.erb/dll/main.bundle.dev.js",
   "scripts": {
     "build": "concurrently \"npm run build:main\" \"npm run build:renderer\"",
@@ -194,8 +187,8 @@
     "webpack-merge": "^6.0.1"
   },
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.erb.ElectronReact",
+    "productName": "SampleFilesArchive",
+    "appId": "com.levi218.SampleFilesArchive",
     "asar": true,
     "asarUnpack": "**\\*.{node,dll}",
     "files": [
@@ -213,6 +206,7 @@
           "x64"
         ]
       },
+      "icon": "assets/icon.png",
       "type": "distribution",
       "hardenedRuntime": true,
       "entitlements": "assets/entitlements.mac.plist",
@@ -236,12 +230,14 @@
     "win": {
       "target": [
         "nsis"
-      ]
+      ],
+      "icon": "assets/icon.png"
     },
     "linux": {
       "target": [
         "AppImage"
       ],
+      "icon": "assets/icon.png",
       "category": "Development"
     },
     "directories": {
@@ -254,12 +250,9 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "electron-react-boilerplate",
-      "repo": "electron-react-boilerplate"
+      "owner": "levi218",
+      "repo": "samplefilesarchive"
     }
-  },
-  "collective": {
-    "url": "https://opencollective.com/electron-react-boilerplate-594"
   },
   "devEngines": {
     "runtime": {
