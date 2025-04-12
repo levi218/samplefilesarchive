@@ -4,7 +4,7 @@ import LocalFileProvider from './local';
 import store from '../store';
 
 function getProviders(): { name: string; provider: FileProvider }[] {
-  const fileProviders = store.get('fileProviders') as FileProviderProps[];
+  const fileProviders = store.get('fileProviders', []) as FileProviderProps[];
   const providers: { name: string; provider: FileProvider }[] = [];
   fileProviders.forEach((provider: any) => {
     if (provider.type === 'github') {
