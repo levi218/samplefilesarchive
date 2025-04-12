@@ -1,9 +1,18 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/jsx-props-no-spreading */
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  ReactNode,
+} from 'react';
 
 type Theme = 'dark' | 'light' | 'system';
 
 type ThemeProviderProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   defaultTheme?: Theme;
   storageKey?: string;
 };
@@ -33,10 +42,6 @@ export function ThemeProvider({
   useEffect(() => {
     const root = window.document.documentElement;
 
-    root.classList.remove('light', 'dark');
-
-    root.classList.add('light');
-    return;
     if (theme === 'system') {
       const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
         .matches
@@ -50,13 +55,16 @@ export function ThemeProvider({
     root.classList.add(theme);
   }, [theme]);
 
-  const value = {
-    theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
-    },
-  };
+  const value = useMemo(
+    () => ({
+      theme,
+      setTheme: (newTheme: Theme) => {
+        localStorage.setItem(storageKey, newTheme);
+        setTheme(newTheme);
+      },
+    }),
+    [theme, storageKey],
+  );
 
   return (
     <ThemeProviderContext.Provider {...props} value={value}>
